@@ -26,6 +26,7 @@ if('serviceWorker' in navigator && 'Notification' in window) {
         navigator.serviceWorker.ready
         .then(function(serviceWorkerRegistration) {
 
+            /*
             serviceWorkerRegistration.pushManager.getSubscription()
             .then(function(subscription) {
                 subscription.unsubscribe()
@@ -35,9 +36,26 @@ if('serviceWorker' in navigator && 'Notification' in window) {
                 .catch(function() {
                     console.log("Unsubscribe FAIL");
                 })
+            })*/
+
+
+            const appCode = 'BLHeKLzTgsslWFtglNCCaD9tMgNmrevzJajVGkyznQJxASqxygt5bcPKw-fVoJay570u06oPzhzjcKlg8xOgX3Y';
+            /**
+             * Private Key
+             * GUpLDVn_XSgdi9qtEWjcCa0Js4rbf1Yz9INW44mcH-o
+             */
+            const options = {
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(appCode)
+            };
+
+            serviceWorkerRegistration.pushManager.subscribe(options)
+            .then(function(pushSubscription) {
+                console.log(pushSubscription)
             })
-
-
+            .catch(function(error) {
+                console.log(error.message);
+            })
         })
 
         Notification.requestPermission(function(permission) {
