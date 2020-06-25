@@ -4,9 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service work</title>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </head>
 <body>
     <h1>Service work</h1>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-messaging.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBzuYa90WN8OgJ1vQP7-avGQh5NRWuo1Fk",
+            authDomain: "expenses-46cdb.firebaseapp.com",
+            databaseURL: "https://expenses-46cdb.firebaseio.com",
+            projectId: "expenses-46cdb",
+            storageBucket: "expenses-46cdb.appspot.com",
+            messagingSenderId: "859884447605",
+            appId: "1:859884447605:web:92e7f85ba6ec547710953c",
+            measurementId: "G-LH3MRMBJ62"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        const messaging = firebase.messaging();
+
+        // Add the public key generated from the console here.
+        messaging.usePublicVapidKey("BLNNQjTEzudWum8rGx_hdafUd2XgIxlm1zB0OKOMZYHryawn1VCYUV77sfrBF0VcekToCaJd-76UzPY6q3tFv2c");
+        
+        messaging.requestPermission().then(function() {
+            console.log("Notification permission granted.")
+            console.log(messaging.getToken())
+        })
+        .catch(function(err) {
+            console.log(err)
+        })
+    </script>
 </body>
 </html>
